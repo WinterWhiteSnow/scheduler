@@ -36,6 +36,13 @@ function write(wow){
 //     todolist.appendChild(li);
 // }
 
+function checked (event) {
+    // const span = document.querySelector(".secondtext .dolist span")
+    // span.classList.toggle("textThrough")
+    const span = event.target.parentElement;
+    span.classList.toggle("textThrough");
+}
+
 function creat(answer) {
     const li = document.createElement("li");
     li.id = answer.id;
@@ -58,10 +65,6 @@ function creat(answer) {
     todolist.appendChild(li);
 }
 
-function checked () {
-    const span = document.querySelector(".secondtext .dolist span")
-    span.classList.toggle("textThrough")
-}
 
 
 
@@ -129,7 +132,7 @@ if (todos.length >= 1) {
     formChild.style.fontWeight = "lighter";
     formChild.style.paddingTop = "15px";
     doList.appendChild(formChild)
-    doinput.classList.add("hidden")
+    // doinput.classList.add("hidden")
 }
 // document.querySelector(".secondtext .dolist li button").addEventListener("mousemove",hiddenButton)
 // document.querySelector(".secondtext .dolist li button").addEventListener("mouseout",showButton)
