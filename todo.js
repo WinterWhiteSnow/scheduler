@@ -1,9 +1,9 @@
-const Form = document.querySelector(".secondtext .dolist-form")
-const todoInput = document.querySelector(".secondtext .dolist-form input")
-const todolist = document.querySelector(".secondtext .dolist")
+const Form = document.querySelector(".dolist-form")
+const todoInput = document.querySelector(".dolist-form input")
+const todolist = document.querySelector(".dolist")
 const todoKey = "todos"
 let todos = [];
-const doButton = document.querySelector(".secondtext .dolist li button")
+const doButton = document.querySelector(".dolist li button")
 
 function savedLocal(){
     localStorage.setItem(todoKey,JSON.stringify(todos))
@@ -11,7 +11,6 @@ function savedLocal(){
 
 function write(wow){
     wow.preventDefault();
-    refresh();
     const answer = todoInput.value;
     const OB = {
         text:answer,
@@ -23,22 +22,7 @@ function write(wow){
     creat(OB);
 }
 
-// function creat(answer) {
-//     const li = document.createElement("li");
-//     li.id = answer.id;
-//     const span = document.createElement("span");
-//     const button = document.createElement("button");
-//     span.innerText = answer.text;
-//     button.innerText = "X";
-//     button.addEventListener("click", remove)
-//     li.appendChild(span);
-//     li.appendChild(button);
-//     todolist.appendChild(li);
-// }
-
 function checked (event) {
-    // const span = document.querySelector(".secondtext .dolist span")
-    // span.classList.toggle("textThrough")
     const span = event.target.parentElement;
     span.classList.toggle("textThrough");
 }
@@ -55,7 +39,6 @@ function creat(answer) {
     input.id = "check"
     label.htmlFor = "check"
     button.innerText = "X";
-    // button.style.fontSize= "30px";
     input.addEventListener("click", checked)
     button.addEventListener("click", remove)
     li.appendChild(input);
@@ -80,24 +63,6 @@ function secondClick () {
     todolist.querySelector("li button").classList.toggle("hidden")
 }
 
-// function showButton() {
-//     document.querySelector(".secondtext .dolist li button").classList.remove("hidden")
-// }
-
-// function hiddenButton() {
-//     document.querySelector(".secondtext .dolist li button").classList.add("hidden")
-// }
-
-
-if (SavedUserName === null) {
-    Form.classList.add("hidden")
-    todolist.classList.add("hidden")
-    
-}
-else{
-    Form.classList.remove("hidden")
-    todolist.classList.remove("hidden")
-}
 
 Form.addEventListener("submit",write);
 
@@ -108,32 +73,9 @@ if (savedTodos) {
     todos = parseTodos;
 }
 
-// function fadeOutEffect() {
-//     const fadeTarget = Form;
-//     let fadeEffect = setInterval(function () {
-//         if (!fadeTarget.style.opacity) {
-//             fadeTarget.style.opacity = 1;
-//         }
-//         if (fadeTarget.style.opacity > 0) {
-//             fadeTarget.style.opacity -= 0.1;
-//         } else {
-//             clearInterval(fadeEffect);
-//         }
-//     }, 200);
-// }
 
 if (todos.length >= 1) {
-    doq.innerText = "TODAY"
-    doq.style.width = doinput.style.width;
     todolist.style.width = doinput.style.width;
-    const formChild = document.createElement("div")
-    formChild.innerText = "Way to go!"
-    formChild.style.fontSize = "30px";
-    formChild.style.fontWeight = "lighter";
-    formChild.style.paddingTop = "15px";
-    doList.appendChild(formChild)
-    // doinput.classList.add("hidden")
 }
-// document.querySelector(".secondtext .dolist li button").addEventListener("mousemove",hiddenButton)
-// document.querySelector(".secondtext .dolist li button").addEventListener("mouseout",showButton)
+
 todolist.querySelector("li span").addEventListener("click",secondClick)
