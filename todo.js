@@ -2,6 +2,7 @@ const Form = document.querySelector(".dolist-form")
 const todoInput = document.querySelector(".dolist-form input")
 const todolist = document.querySelector(".dolist")
 const todoKey = "todos"
+const centerSpan = document.querySelector("span")
 let todos = [];
 const doButton = document.querySelector(".dolist li button")
 
@@ -79,3 +80,4 @@ if (todos.length >= 1) {
 }
 
 todolist.querySelector("li span").addEventListener("click",secondClick)
+centerSpan.style.marginLeft = `${(window.innerWidth / 3.5).toString() + "px"}`
