@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html>
+  
   <head>
-    <title>Vanilla Challenge</title>
-    <meta charset="UTF-8"/>
-    <link rel="stylesheet" href="wow.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>수첩</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
+
     <span>
       <form class="dolist-form">
-        <h1>목록을 적으세요</h4>
-        <input type="text" required/>
+        <h1>메모장</h4>
+        <input id="name" type="text" placeholder="물품" required/>
+        <input id="price" type="number" min="0" placeholder="금액" required/>
+        <button class="hidden" type="sumit">제출하기</button>
       </form>
       <ul class="dolist"></ul>
-    </span>   
+      <span class ="amount"></span>
+    </span>  
 
-    <script src="todo.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

@@ -1,24 +1,36 @@
+
+
 const Form = document.querySelector(".dolist-form")
-const todoInput = document.querySelector(".dolist-form input")
+const Name = Form.querySelector("#name")
+const Price = Form.querySelector("#price")
 const todolist = document.querySelector(".dolist")
+const amount = document.querySelector("span .amount")
+
 const todoKey = "todos"
-const centerSpan = document.querySelector("span")
+const amountKey = "amount"
 let todos = [];
+let totalAmount =0;
+let aa = []
 const doButton = document.querySelector(".dolist li button")
 
 function savedLocal(){
-    localStorage.setItem(todoKey,JSON.stringify(todos))
+    localStorage.setItem(todoKey,JSON.stringify(todos));
+    localStorage.setItem(amountKey,totalAmount)
 }
 
 function write(wow){
     wow.preventDefault();
-    const answer = todoInput.value;
+    const productName = Name.value;
+    const productPrice = Price.value;
     const OB = {
-        text:answer,
+        text:productName,
+        number:productPrice,
         id:Date.now()
     };
     todos.push(OB);
-    todoInput.value = "";
+    totalAmount += parseInt(Price.value);
+    Name.value = "";
+    Price.value = "";
     savedLocal();
     creat(OB);
 }
@@ -28,37 +40,51 @@ function checked (event) {
     span.classList.toggle("textThrough");
 }
 
+
+function remove (event) {
+    const li = event.target.parentElement;
+    const wow = li.querySelector("span #amount").innerText
+    totalAmount-=parseInt(wow.slice(0,-1))
+    li.remove();
+    amount.innerText = `총 금액 : ${totalAmount}원`;
+    todos = todos.filter((potato) => potato.id !== parseInt(li.id));
+    savedLocal();
+}
+
 function creat(answer) {
     const li = document.createElement("li");
     li.id = answer.id;
-    const span = document.createElement("span");
+    const nameSpan = document.createElement("span");
+    const priceDiv = document.createElement("span");
     const input = document.createElement("input");
     const label = document.createElement("label");
     const button = document.createElement("button");
-    span.innerText = answer.text;
-    input.type = "checkbox"
-    input.id = "check"
-    label.htmlFor = "check"
+    priceDiv.id = "amount";
+    nameSpan.innerText = answer.text;
+    priceDiv.innerText = ` ${answer.number}원`;
+    input.type = "checkbox";
+    input.id = "check";
+    label.htmlFor = "check";
     button.innerText = "X";
     input.addEventListener("click", checked)
     button.addEventListener("click", remove)
     li.appendChild(input);
     li.appendChild(label);
-    li.appendChild(span);
+    li.appendChild(nameSpan);
+    li.appendChild(priceDiv);
     li.appendChild(button);
     todolist.appendChild(li);
+    const wow = localStorage.getItem(amountKey)
+    if (wow){
+      totalAmount = parseInt(wow)
+      amount.innerText = `총 금액 : ${totalAmount}원`;
+    }
+    else{
+    amount.innerText = `총 금액 : ${totalAmount}원`;
+    }
 }
 
 
-
-
-function remove (event) {
-    const li = event.target.parentElement;
-    li.remove();
-    todos = todos.filter((potato) => potato.id !== parseInt(li.id));
-    savedLocal();
-    refresh();
-}
 
 function secondClick () {
     todolist.querySelector("li button").classList.toggle("hidden")
@@ -75,9 +101,11 @@ if (savedTodos) {
 }
 
 
-if (todos.length >= 1) {
-    todolist.style.width = doinput.style.width;
-}
 
-todolist.querySelector("li span").addEventListener("click",secondClick)
-centerSpan.style.marginLeft = `${(window.innerWidth / 3.5).toString() + "px"}`
+
+// if (todos.length >= 1) {
+//     todolist.style.width = doinput.style.width;
+// }
+
+// todolist.querySelector("li span").addEventListener("click",secondClick)
+// centerSpan.style.marginLeft = `${(window.innerWidth / 3.5).toString() + "px"}`
